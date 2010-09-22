@@ -1,9 +1,12 @@
 <?php
+// $Id$
 
 /**
  * Implementation of hook_views_plugins()
  */
 function views_tree_views_plugins() {
+  $path = drupal_get_path('module', 'views_tree');
+
   return array(
     'style' => array(
       'tree' => array(
@@ -17,7 +20,8 @@ function views_tree_views_plugins() {
         'uses grouping'   => FALSE,
         'type'            => 'normal',
         'parent'          => 'list',
-        //'theme file'      => 'views_tree.theme.inc',
+        'theme path' => $path,
+        'theme file' => 'views_tree.theme.inc',
       ),
     ),
   );
