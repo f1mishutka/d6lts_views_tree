@@ -19,8 +19,8 @@ function views_tree_views_plugins() {
         'uses grouping'   => FALSE,
         'type'            => 'normal',
         'parent'          => 'list',
-        'theme path' => $path,
-        'theme file' => 'views_tree.theme.inc',
+        'theme path'      => $path,
+        'theme file'      => 'views_tree.theme.inc',
       ),
     ),
   );

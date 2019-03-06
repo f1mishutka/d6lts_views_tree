@@ -5,7 +5,7 @@
  */
 function views_tree_views_api() {
   return array(
-    'api' => 2,
+    'api'  => 2,
     'path' => drupal_get_path('module', 'views_tree'),
   );
 }
@@ -17,12 +17,12 @@ function views_tree_theme($existing, $type, $theme, $path) {
   return array(
     'views_tree_inner' => array(
       'arguments' => array(
-        'view' => NULL,
+        'view'    => NULL,
         'options' => array(),
-        'rows' => array(),
-        'title' => NULL,
-        'result' => array(),
-        'parent' => NULL,
+        'rows'    => array(),
+        'title'   => NULL,
+        'result'  => array(),
+        'parent'  => NULL,
       ),
     ),
   );
@@ -49,11 +49,11 @@ function theme_views_tree($view, $options, $rows, $title) {
   // We only have to do this once, so we do it here in the wrapping function.
   $parents = array();
   foreach ($result as $record) {
-    $parents[] = $record->$options['main_field_property'];
+    $parents[] = $record->{$options['main_field_property']};
   }
   foreach ($result as $record) {
-    if (! in_array($record->$options['parent_field_property'], $parents)) {
-      $record->$options['parent_field_property'] = 0;
+    if (! in_array($record->{$options['parent_field_property']}, $parents)) {
+      $record->{$options['parent_field_property']} = 0;
     }
   }
 
@@ -76,8 +76,8 @@ function theme_views_tree($view, $options, $rows, $title) {
 function theme_views_tree_inner($view, $options, $rows, $title, $result, $parent = NULL) {
   $items = array();
   foreach ($result as $i => $record) {
-    if ($record->$options['parent_field_property'] == $parent) {
-      $items[] = $rows[$i] . call_user_func(__FUNCTION__, $view, $options, $rows, $title, $result, $record->$options['main_field_property']);
+    if ($record->{$options['parent_field_property']} == $parent) {
+      $items[] = $rows[$i] . call_user_func(__FUNCTION__, $view, $options, $rows, $title, $result, $record->{$options['main_field_property']});
     }
   }
   return count($items) ? theme('item_list', $items, NULL, $options['type']) : '';
